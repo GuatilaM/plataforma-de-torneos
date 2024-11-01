@@ -1,10 +1,10 @@
 import './App.css';
-import FormUsuario from './components/FormUsuario';
+import FormTorneo from './components/FormTorneo';
 
 function App() {
   return (
     <div>
-      <FormUsuario />
+      <FormTorneo  />
     </div>
   );
 }

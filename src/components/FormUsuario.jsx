@@ -2,6 +2,8 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 
+//Formulario que en adelante se podría usar para
+//creación de usuarios en la plataforma
 function FormUsuario() {
     return (
         <Formik
