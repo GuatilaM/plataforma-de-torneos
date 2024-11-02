@@ -1,7 +1,38 @@
-import { Formik, Form, useField } from "formik";
+import { Formik, Form, Field, useField, FormikProps } from "formik";
 import * as Yup from 'yup';
+import Button  from "react-bootstrap/Button";
+import {default as BForm} from "react-bootstrap/Form";
+import parseDateInput from "../utils/formatoFecha";
 
 function FormTorneo(){
+    const hoy = new Date();
+
+    const schema = Yup.object({
+        nombre: Yup.string().required('Campo requerido'),
+        fechaInicio: Yup.date()
+            .typeError('Ingrese una fecha válida en el formato dd/mm/aaaa')
+            .transform(parseDateInput)
+            .min(hoy, 'Ingrese una fecha posterior a hoy')
+            .required('Campo requerido'),
+        fechaFin: Yup.date()
+            .typeError('Ingrese una fecha válida en el formato dd/mm/aaaa')
+            .transform(parseDateInput)
+            .min(Yup.ref('fechaInicio'), 'Ingrese una fecha igual o posterior a la fecha de inicio')
+            .required('Campo requerido'),
+        tipo: Yup.string().required('Campo requerido'),
+        descripcion: Yup.string(),
+        numJugadoresEquipo: Yup.number('Numérico')
+            .required('Campo requerido')
+            .positive('Número inválido')
+            .integer('Número inválido')
+            .typeError('Ingrese sólo números'),
+        minParticipantes: Yup.number()
+            .required('Campo requerido')
+            .positive('Número inválido')
+            .integer('Número inválido')
+            .typeError('Ingrese sólo números'),
+    });
+
     return (
         <Formik
             initialValues={
@@ -9,23 +40,13 @@ function FormTorneo(){
                     nombre: '', 
                     fechaInicio: '', 
                     fechaFin: '', 
-                    tipo: '', 
+                    tipo: 'simple', 
                     descripcion: '', 
                     numJugadoresEquipo: '', 
-                    minEquipos: '',
+                    minParticipantes: '',
                 }
             }
-            validationSchema={
-                Yup.object({
-                    nombre: Yup.string().required('Campo Requerido'),
-                    fechaInicio: Yup.date().default(() => new Date()),
-                    fechaFin: Yup.date().default(() => new Date()),
-                    tipo: Yup.string().required('Campo requerido'),
-                    descripcion: Yup.string().required('Campo requerido'),
-                    numJugadoresEquipo: Yup.number().required('Campo requerido').positive('Número inválido').integer('Número inválido'),
-                    minEquipos: Yup.number().required('Campo requerido').positive('Número inválido').integer('Número inválido'),
-                })
-            }
+            validationSchema={schema}
             onSubmit={(values, {setSubmitting}) => {
                 setTimeout(() => {
                     alert(JSON.stringify(values, null, 2));
@@ -33,47 +54,62 @@ function FormTorneo(){
                 }, 400);
             }}
         >
-            <Form>
-                <TextInput 
-                    label="Nombre"
-                    name="nombre"
-                    type="text"
-                    placeholder="Nombre del torneo" 
-                />
-                <TextInput
-                    label="Fecha de inicio"
-                    name="fechaInicio"
-                    type="text"
-                    placeholder="Fecha de inicio"
-                />
-                <TextInput
-                    label="Fecha final"
-                    name="fechaFin"
-                    type="text"
-                    placeholder="Fecha final"
-                />
-                <TextInput
-                    label="Tipo de torneo"
-                    name="tipo"
-                    type="text"
-                    placeholder="Tipo de torneo"
-                />
-                <TextInput
-                    label="Descripcion"
-                    name="descripcion"
-                    type="text"
-                    placeholder="Descripcion"
-                />
-                <TextInput
-                    label="Número de jugadores por equipo"
-                    name="numJugadoresEquipo"
-                    type="number"
-                />
-                <TextInput
-                    label="Mínimo número de equipos"
-                    name="minEquipos"
-                    type="number"
-                />
+            <Form noValidate>
+                <BForm.Group className="mb-3">
+                    <TextInput
+                        label="Nombre del torneo"
+                        name="nombre"
+                        type="text"
+                    />
+                </BForm.Group>
+                <BForm.Group className="mb-3">
+                    <TextInput
+                        label="Fecha inicio"
+                        name="fechaInicio"
+                        type="text"
+                        placeholder="dd/mm/aaaa"
+                    />
+                </BForm.Group>
+                <BForm.Group className="mb-3">
+                    <TextInput
+                        label="Fecha fin"
+                        name="fechaFin"
+                        type="text"
+                        placeholder="dd/mm/aaaa"
+                    />
+                </BForm.Group>
+                <BForm.Group className="mb-3">
+                    <BForm.Label htmlFor="tipo">Tipo de torneo</BForm.Label>
+                    <Field as="select" name="tipo" className="form-select">
+                        <option value="simple">Eliminación simple</option>
+                        <option value="doble">Eliminación doble</option>
+                        <option value="liga">Liga</option>
+                    </Field>
+                </BForm.Group>
+                <BForm.Group className="mb-3">
+                    <TextInput
+                        label="Descripción"
+                        name="descripcion"
+                        type="text"
+                        as="textarea"
+                    />
+                </BForm.Group>
+                <BForm.Group className="mb-3">
+                    <TextInput
+                        label="Número de jugadores por equipo"
+                        name="numJugadoresEquipo"
+                        type="text"
+                        placeholder="Individual: 1"
+                    />
+                </BForm.Group>
+                <BForm.Group className="mb-3">
+                    <TextInput
+                        label="Mínimo de participantes"
+                        name="minParticipantes"
+                        type="text"
+                    />
+                </BForm.Group>
+                <Button variant="success" type="submit">Crear Torneo</Button>
             </Form>
         </Formik>
     );
@@ -82,13 +118,16 @@ function FormTorneo(){
 function TextInput({label, ...props}) {
     const [field, meta] = useField(props);
     return (
-        <div>
-            <label htmlFor={props.id || props.name}>{label}</label>
-            <input {...field} {...props} />
-            {meta.touched && meta.error ? (
-                <div>{meta.error}</div>
-            ) : null}
-        </div>
+        <>
+            <BForm.Label htmlFor={props.id || props.name}>{label}</BForm.Label>
+            <BForm.Control {...field} {...props} isInvalid={!!meta.error} />
+            <BForm.Control.Feedback type="invalid">
+                {meta.error}
+            </BForm.Control.Feedback>
+            {/* {meta.touched && meta.error ? (
+                <BForm.Text className="text-muted">{meta.error}</BForm.Text>
+            ) : null} */}
+        </>
     );
 }
 
