@@ -1,7 +1,8 @@
-import { Formik, Form, useField } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from 'yup';
 import Button  from "react-bootstrap/Button";
 import {default as BForm} from "react-bootstrap/Form";
+import TextInput from "./TextInput";
 
 function FormEquipo(){
 
@@ -48,19 +49,6 @@ function FormEquipo(){
                 <Button variant="success" type="submit">Crear Jugador</Button>
             </Form>
         </Formik>
-    );
-}
-
-function TextInput({label, ...props}) {
-    const [field, meta] = useField(props);
-    return (
-        <>
-            <BForm.Label htmlFor={props.id || props.name}>{label}</BForm.Label>
-            <BForm.Control {...field} {...props} isInvalid={!!meta.error} />
-            <BForm.Control.Feedback type="invalid">
-                {meta.error}
-            </BForm.Control.Feedback>
-        </>
     );
 }
 

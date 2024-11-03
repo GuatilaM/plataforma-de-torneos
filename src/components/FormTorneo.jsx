@@ -1,8 +1,9 @@
-import { Formik, Form, Field, useField } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from 'yup';
 import Button  from "react-bootstrap/Button";
 import {default as BForm} from "react-bootstrap/Form";
 import parseDateInput from "../utils/formatoFecha";
+import TextInput from "./TextInput";
 
 function FormTorneo(){
     const hoy = new Date();
@@ -112,22 +113,6 @@ function FormTorneo(){
                 <Button variant="success" type="submit">Crear Torneo</Button>
             </Form>
         </Formik>
-    );
-}
-
-function TextInput({label, ...props}) {
-    const [field, meta] = useField(props);
-    return (
-        <>
-            <BForm.Label htmlFor={props.id || props.name}>{label}</BForm.Label>
-            <BForm.Control {...field} {...props} isInvalid={!!meta.error} />
-            <BForm.Control.Feedback type="invalid">
-                {meta.error}
-            </BForm.Control.Feedback>
-            {/* {meta.touched && meta.error ? (
-                <BForm.Text className="text-muted">{meta.error}</BForm.Text>
-            ) : null} */}
-        </>
     );
 }
 
