@@ -6,10 +6,12 @@ import Col from 'react-bootstrap/Col';
 import FormTorneo from './components/FormTorneo';
 import FormJugador from './components/FormJugador';
 import FormEquipo from './components/FormEquipo';
+import BarraNav from './components/BarraNav';
 
 function App() {
   return (
     <div>
+      <BarraNav />
       <Container>
         <Row>
           <Col>
