@@ -8,17 +8,29 @@ function BarraNav() {
     return(
         <Navbar expand="lg" className='bg-body-tertiary'> 
             <Container>
-                <Navbar.Brand>Reto de Programacion UD</Navbar.Brand>
+                <Navbar.Brand>
+                    <Link to={'/'} className='nav-link'>
+                        Reto de Programacion UD
+                    </Link>
+                </Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse className='justify-content-end'>
                     <NavDropdown title="Crear">
                         <NavDropdown.Item as='div'>
-                            <Link to={'torneos/crear'}>
+                            <Link to={'torneos/crear'} className='nav-link'>
                                 Torneo
                             </Link>
                         </NavDropdown.Item>
-                        <NavDropdown.Item>Jugador</NavDropdown.Item>
-                        <NavDropdown.Item>Equipo</NavDropdown.Item>
+                        <NavDropdown.Item as='div'>
+                            <Link to={'jugadores/crear'} className='nav-link'>
+                                Jugador
+                            </Link>
+                        </NavDropdown.Item>
+                        <NavDropdown.Item as='div'>
+                            <Link to={'equipos/crear'} className='nav-link'>
+                                Equipo
+                            </Link>
+                        </NavDropdown.Item>
                     </NavDropdown>
                     <Nav className='mx-3'>
                         Ver

@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './error-page';
 import CrearTorneo from './components/crear-torneo.component';
+import CrearJugador from './components/crear-jugador.component';
+import CrearEquipo from './components/crear-equipo.component';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +18,14 @@ const router = createBrowserRouter([
       {
         path: 'torneos/crear',
         element: <CrearTorneo />,
+      },
+      {
+        path: 'jugadores/crear',
+        element: <CrearJugador />,
+      },
+      {
+        path: 'equipos/crear',
+        element: <CrearEquipo />,
       },
     ],
   },
