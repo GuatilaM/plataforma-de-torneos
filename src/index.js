@@ -15,6 +15,7 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
+      // { index: true, element: '' },
       {
         path: 'torneos/crear',
         element: <CrearTorneo />,

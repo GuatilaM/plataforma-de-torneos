@@ -4,7 +4,7 @@ import Button  from "react-bootstrap/Button";
 import {default as BForm} from "react-bootstrap/Form";
 import TextInput from "./TextInput";
 
-function FormEquipo(){
+function FormEquipo(props){
 
     const schema = Yup.object({
         nombreEquipo: Yup.string().required('Campo requerido')
@@ -15,19 +15,8 @@ function FormEquipo(){
 
     return (
         <Formik
-            initialValues={
-                {
-                    nombreEquipo: '', 
-                    nombresIntegrantes: '',
-                }
-            }
+            {...props}
             validationSchema={schema}
-            onSubmit={(values, {setSubmitting}) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                }, 400);
-            }}
         >
             <Form noValidate>
                 <BForm.Group className="mb-3">

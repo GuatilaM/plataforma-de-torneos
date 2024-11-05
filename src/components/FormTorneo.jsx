@@ -5,7 +5,7 @@ import {default as BForm} from "react-bootstrap/Form";
 import parseDateInput from "../utils/formatoFecha";
 import TextInput from "./TextInput";
 
-function FormTorneo(){
+function FormTorneo(props){
     const hoy = new Date();
 
     const schema = Yup.object({
@@ -36,27 +36,11 @@ function FormTorneo(){
 
     return (
         <Formik
-            initialValues={
-                {
-                    nombre: '', 
-                    fechaInicio: '', 
-                    fechaFin: '', 
-                    tipo: 'simple', 
-                    descripcion: '', 
-                    numJugadoresEquipo: '', 
-                    minParticipantes: '',
-                }
-            }
+            {...props}
             validationSchema={schema}
-            onSubmit={(values, {setSubmitting}) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                }, 400);
-            }}
         >
             <Form noValidate>
-                <BForm.Group className="mb-3">
+                <BForm.Group className="my-3">
                     <TextInput
                         label="Nombre del torneo"
                         name="nombre"
