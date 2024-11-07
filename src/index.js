@@ -8,6 +8,7 @@ import ErrorPage from './error-page';
 import CrearTorneo from './components/crear-torneo.component';
 import CrearJugador from './components/crear-jugador.component';
 import CrearEquipo from './components/crear-equipo.component';
+import ListTorneo from './components/list-torneo.component';
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      // { index: true, element: '' },
+      { index: true, element: <ListTorneo /> },
       {
         path: 'torneos/crear',
         element: <CrearTorneo />,
