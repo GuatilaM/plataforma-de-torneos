@@ -7,12 +7,12 @@ function ListTorneo() {
     const [torneos, setTorneos] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:4000/')
+        axios.get('http://localhost:4000/torneos')
             .then(({ data }) => {
                 setTorneos(data);
             })
             .catch((error) => {
-                console.log(error);
+                console.log('Error 404 ' + error);
             });
     }, []);
 

@@ -16,7 +16,7 @@ function CrearTorneo() {
     );
 
     const onSubmit = (torneoObject) => {
-        axios.post('http://localhost:3000/torneo/torneo', torneoObject)
+        axios.post('http://localhost:4000/torneos/crear', torneoObject)
             .then((response) => {
                 if (response.status === 200){
                     alert('Torneo creado');
