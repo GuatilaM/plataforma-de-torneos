@@ -16,13 +16,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-app.use('/', TorneoRoute);
+app.use('/torneos', TorneoRoute);
 
 const port = 4000;
-
-app.get('/', (req, res) => {
-    res.send('Hello express');
-});
 
 app.listen(port, () => {
     console.log('Express app listening on port: ' + port);
