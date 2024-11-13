@@ -11,7 +11,7 @@ function CrearJugador() {
     );
 
     const onSubmit = (jugadorObject) => {
-        axios.post('http://localhost:3000/torneo/torneo', jugadorObject)
+        axios.post('http://localhost:4000/jugadores/crear', jugadorObject)
             .then((response) => {
                 if (response.status === 200){
                     alert('Jugador creado');
