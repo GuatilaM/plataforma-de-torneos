@@ -9,6 +9,7 @@ import CrearTorneo from './components/crear-torneo.component';
 import CrearJugador from './components/crear-jugador.component';
 import CrearEquipo from './components/crear-equipo.component';
 import ListTorneo from './components/list-torneo.component';
+import EditarTorneo from './components/editar-torneo.component';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: 'torneos/crear',
         element: <CrearTorneo />,
+      },
+      {
+        path: 'torneos/editar/:id',
+        element: <EditarTorneo />,
       },
       {
         path: 'jugadores/crear',

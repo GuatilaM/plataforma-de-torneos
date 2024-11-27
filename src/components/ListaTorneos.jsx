@@ -1,9 +1,11 @@
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+import { format } from "date-fns";
 import Edit from "../svg/edit.svg";
 import Delete from "../svg/delete.svg";
 
 function ListaTorneos({torneoObj}) {
-    const {
+    let {
         _id,
         nombre,
         fechaInicio,
@@ -12,6 +14,10 @@ function ListaTorneos({torneoObj}) {
         descripcion,
         numJugadoresEquipo,
     } = torneoObj;
+
+    // Cambiar formato de ISO al mismo del input (legible)
+    fechaInicio = format(fechaInicio, 'dd/MM/yyyy');
+    fechaFin = format(fechaFin, 'dd/MM/yyyy');
 
     return (
         <tr>
@@ -25,9 +31,11 @@ function ListaTorneos({torneoObj}) {
                 'Individual' : numJugadoresEquipo}
             </td>
             <td>
-                <Button variant="secondary" className="mx-1">
-                    <img src={Edit} alt="edit" />
-                </Button>
+                <Link to={`/torneos/editar/${_id}`}>
+                    <Button variant="secondary" className="mx-1">
+                        <img src={Edit} alt="edit" />
+                    </Button>
+                </Link>
                 <Button variant="danger" className="mx-1">
                     <img src={Delete} alt="delete" />
                 </Button>

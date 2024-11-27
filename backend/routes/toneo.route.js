@@ -23,4 +23,28 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+// UPDATE Torneo
+router.route('/editar/:id')
+    .get(async(req, res, next) => {
+        try {
+            const data = await Torneo.findById(req.params.id);
+            res.json(data);
+        } catch (error) {
+            return next(error);
+        }
+    })
+    .put(async(req,res,next) => {
+        try {
+            const data = await Torneo.findByIdAndUpdate(
+                req.params.id,
+                { $set: req.body },
+                { new: true }
+            );
+            console.log(data);
+            res.json(data);
+        } catch (error) {
+            return next(error);
+        }
+    });
+
 module.exports = router;
