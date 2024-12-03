@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { parse } from "date-fns";
 import FormTorneo from "./FormTorneo";
+import { useNavigate } from "react-router-dom";
 
 function CrearTorneo() {
     const [formValues, setFormValues] = useState(
@@ -16,6 +17,8 @@ function CrearTorneo() {
         }
     );
 
+    let navigate = useNavigate();
+
     const onSubmit = (torneoObject) => {
         //Modificar input de fechas a ISO antes de enviar a backend
         torneoObject.fechaInicio = parse(torneoObject.fechaInicio, 'dd/MM/yyyy', new Date()).toISOString();
@@ -26,6 +29,7 @@ function CrearTorneo() {
             .then((response) => {
                 if (response.status === 200){
                     alert('Torneo creado');
+                    navigate('/');
                 } else {
                     Promise.reject();
                 }
