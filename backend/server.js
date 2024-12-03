@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const TorneoRoute = require('./routes/toneo.route');
+const TorneoRoute = require('./routes/torneo.route');
 const JugadorRoute = require('./routes/jugador.route');
 
 mongoose.connect('mongodb://127.0.0.1:27017/backend')

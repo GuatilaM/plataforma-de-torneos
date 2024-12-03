@@ -47,4 +47,16 @@ router.route('/editar/:id')
         }
     });
 
+// DELETE Torneo
+router.delete('/eliminar/:id', async(req, res, next) => {
+    try {
+        const data = await Torneo.findByIdAndDelete(req.params.id);
+        res.status(200).json({
+            msg: data,
+        });
+    } catch (error) {
+        return next(error);
+    }
+});
+
 module.exports = router;
