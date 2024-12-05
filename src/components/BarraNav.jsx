@@ -32,9 +32,23 @@ function BarraNav() {
                             </Link>
                         </NavDropdown.Item>
                     </NavDropdown>
-                    <Nav className='mx-3'>
-                        Ver
-                    </Nav>
+                    <NavDropdown title="Ver" className='mx-3'>
+                        <NavDropdown.Item as='div'>
+                            <Link to={'/'} className='nav-link'>
+                                Torneos
+                            </Link>
+                        </NavDropdown.Item>
+                        <NavDropdown.Item as='div'>
+                            <Link to={'jugadores/ver'} className='nav-link'>
+                                Jugadores
+                            </Link>
+                        </NavDropdown.Item>
+                        <NavDropdown.Item as='div'>
+                            <Link to={'equipos/ver'} className='nav-link'>
+                                Equipos
+                            </Link>
+                        </NavDropdown.Item>
+                    </NavDropdown>
                 </Navbar.Collapse>
             </Container>
         </Navbar>

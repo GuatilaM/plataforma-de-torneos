@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import FormJugador from "./FormJugador";
 
 function CrearJugador() {
@@ -10,11 +11,14 @@ function CrearJugador() {
         }
     );
 
+    let navigate = useNavigate();
+
     const onSubmit = (jugadorObject) => {
         axios.post('http://localhost:4000/jugadores/crear', jugadorObject)
             .then((response) => {
                 if (response.status === 200){
                     alert('Jugador creado');
+                    navigate('/jugadores/ver');
                 } else {
                     Promise.reject();
                 }
