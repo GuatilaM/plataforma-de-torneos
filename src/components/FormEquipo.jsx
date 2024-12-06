@@ -35,7 +35,7 @@ function FormEquipo(props){
                         placeholder="ej: nombre1, nombre2, nombre3"
                     />
                 </BForm.Group>
-                <Button variant="success" type="submit">Crear Jugador</Button>
+                <Button variant="success" type="submit">Crear Equipo</Button>
             </Form>
         </Formik>
     );
