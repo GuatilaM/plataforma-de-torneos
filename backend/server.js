@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const TorneoRoute = require('./routes/torneo.route');
 const JugadorRoute = require('./routes/jugador.route');
+const EquipoRoute = require('./routes/equipo.route');
 
 mongoose.connect('mongodb://127.0.0.1:27017/backend')
     .then(() => {
@@ -19,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use('/torneos', TorneoRoute);
 app.use('/jugadores', JugadorRoute);
+app.use('/equipos', EquipoRoute);
 
 const port = 4000;
 
