@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import axios from "axios";
 import Edit from "../svg/edit.svg";
 import Delete from "../svg/delete.svg";
+import Register from "../svg/register.svg";
 
 function ListaTorneos({torneoObj}) {
     let {
@@ -45,6 +46,11 @@ function ListaTorneos({torneoObj}) {
                 'Individual' : numJugadoresEquipo}
             </td>
             <td>
+                <Link to={`/torneos/inscripciones/${_id}`}>
+                    <Button variant="success" className="mx-1">
+                        <img src={Register} alt="register" />
+                    </Button>
+                </Link>
                 <Link to={`/torneos/editar/${_id}`}>
                     <Button variant="secondary" className="mx-1">
                         <img src={Edit} alt="edit" />

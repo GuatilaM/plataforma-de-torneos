@@ -25,7 +25,7 @@ function ListTorneo() {
     }
 
     return (
-        <Table>
+        <Table className="my-3">
             <thead>
                 <tr>
                     <th>Nombre Torneo</th>
