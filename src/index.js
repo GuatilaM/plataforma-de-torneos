@@ -14,7 +14,7 @@ import ListJugadores from './components/list-jugadores.component';
 import EditarJugador from './components/editar-jugador.component';
 import ListEquipos from './components/list-equipos.component';
 import EditarEquipo from './components/editar-equipo.component';
-import InscripcionTorneo from './components/InscripcionTorneo';
+import InscribirTorneo from './components/inscribir-torneo.component';
 
 const router = createBrowserRouter([
   {
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'torneos/inscripciones/:id',
-        element: <InscripcionTorneo />,
+        element: <InscribirTorneo />,
       },
       {
         path: 'jugadores/crear',
