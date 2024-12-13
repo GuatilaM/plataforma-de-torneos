@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Torneo = require('../models/Torneo');
+const Jugador = require('../models/Jugador');
+const Equipo = require('../models/Equipo');
 
 // CREATE Torneo
 router.post('/crear', async (req, res, next) => {
@@ -54,6 +56,42 @@ router.delete('/eliminar/:id', async(req, res, next) => {
         res.status(200).json({
             msg: data,
         });
+    } catch (error) {
+        return next(error);
+    }
+});
+
+// Inscribir jugador
+router.put('/inscribir-jugador/:id', async(req, res, next) => {
+    try {
+        const jugadorInscribir = await Jugador.findOne(
+            {nombreJugador: req.body.nombreParticipante}
+        );
+        const data = await Torneo.findByIdAndUpdate(
+            req.params.id,
+            {$push: {jugadores: jugadorInscribir}},
+            {new: true}
+        );
+        console.log(data);
+        res.json(data);  
+    } catch (error) {
+        return next(error);
+    }
+});
+
+// Inscribir equipo
+router.put('/inscribir-equipo/:id', async(req, res, next) => {
+    try {
+        const equipoInscribir = await Equipo.findOne(
+            {nombreEquipo: req.body.nombreParticipante}
+        );
+        const data = await Torneo.findByIdAndUpdate(
+            req.params.id,
+            {$push: {equipos: equipoInscribir}},
+            {new: true}
+        );
+        console.log(data);
+        res.json(data);  
     } catch (error) {
         return next(error);
     }

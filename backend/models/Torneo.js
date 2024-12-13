@@ -9,6 +9,14 @@ const torneoSchema = new Schema({
     descripcion: String,
     numJugadoresEquipo: Number,
     minParticipantes: Number,
+    jugadores: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Jugador',
+    }],
+    equipos: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Equipo',
+    }]
 });
 
 const Torneo = model('Torneo', torneoSchema);
