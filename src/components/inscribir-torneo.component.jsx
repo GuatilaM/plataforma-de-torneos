@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import InscripcionTorneo from "./InscripcionTorneo";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 
 function InscribirTorneo(){
@@ -20,17 +20,35 @@ function InscribirTorneo(){
 
     const [label, setLabel] = useState('');
 
-    // const [formValues, setFormValues] = useState(
-    //     {
-    //         nombreParticipante: '',
-    //     }
-    // );
-
     const { id } = useParams();
+    let navigate = useNavigate();
 
-    const onSubmit = () => {
-        // axios.put().then().catch();
-        alert('Failed successfuly');
+    const onSubmit = (torneoObject) => {
+        if (label === 'Nombre jugador'){
+            axios.put(`http://localhost:4000/torneos/inscribir-jugador/${id}`, torneoObject)
+                .then((response) => {
+                    if (response.status === 200) {
+                        alert('Inscripción exitosa');
+                        // Redirigir al usuario al inicio
+                        navigate('/');
+                    } else {
+                        Promise.reject();
+                    }
+                })
+                .catch((error) => alert('Ha ocurrido un error'));
+        } else if (label === 'Nombre equipo'){
+            axios.put(`http://localhost:4000/torneos/inscribir-equipo/${id}`, torneoObject)
+                .then((response) => {
+                    if (response.status === 200) {
+                        alert('Inscripción exitosa');
+                        // Redirigir al usuario al inicio
+                        navigate('/');
+                    } else {
+                        Promise.reject();
+                    }
+                })
+                .catch((error) => alert('Ha ocurrido un error'));
+        }
     }
 
     useEffect(() => {
