@@ -3,6 +3,7 @@ import InscripcionTorneo from "./InscripcionTorneo";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
+import ListGroup from "react-bootstrap/ListGroup";
 
 function InscribirTorneo(){
     const [formValues, setFormValues] = useState(
@@ -15,10 +16,13 @@ function InscribirTorneo(){
             numJugadoresEquipo: '',
             minParticipantes: '',
             nombreParticipante: '',
+            jugadores: [],
+            equipos: [],
         }
     );
 
     const [label, setLabel] = useState('');
+    const [participantesList, setParticipantesList] = useState([]);
 
     const { id } = useParams();
     let navigate = useNavigate();
@@ -61,7 +65,9 @@ function InscribirTorneo(){
                     tipo,
                     descripcion,
                     numJugadoresEquipo,
-                    minParticipantes
+                    minParticipantes,
+                    jugadores,
+                    equipos,
                 } = response.data;
 
                 // Cambiar formato de ISO al mismo del input (legible)
@@ -69,27 +75,46 @@ function InscribirTorneo(){
                 fechaFin = format(fechaFin, 'dd/MM/yyyy');
 
                 setFormValues({
+                    ...formValues,
                     nombre,
                     fechaInicio,
                     fechaFin,
                     tipo,
                     descripcion,
                     numJugadoresEquipo,
-                    minParticipantes
+                    minParticipantes, 
+                    jugadores,
+                    equipos,
                 });
 
-                // cambiar Label de acuerdo si es equipo o individual
-                if(numJugadoresEquipo === 1){
-                    setLabel('Nombre jugador');
-                } else {
-                    setLabel('Nombre equipo');
-                }
+                // cambiar de acuerdo a si es equipo o individual
+                setLabelAndParticipantesList(numJugadoresEquipo, jugadores, equipos);
             })
             .catch((error) => console.log(error));
     }, [id]);
 
+    function setLabelAndParticipantesList(numJugadoresEquipo, jugadores, equipos) {
+        let list = []; 
+        if (numJugadoresEquipo === 1){
+            setLabel('Nombre jugador');
+            list = jugadores.map((jugador, index) => 
+                <ListGroup.Item key={index}>{jugador.nombreJugador}</ListGroup.Item>
+            );
+        } else {
+            setLabel('Nombre equipo');
+            list = equipos.map((equipo, index) => 
+                <ListGroup.Item key={index}>{equipo.nombreEquipo}</ListGroup.Item>
+            );
+        }
+        setParticipantesList(list);
+    }
+
     return(
         <>
+            <h3 className="my-4">Participantes inscritos</h3>
+            <ListGroup variant="flush">
+                {participantesList.length !== 0 ? participantesList : '¡sé el primero!'}
+            </ListGroup>
             <h3 className="my-4">Inscribir participante</h3>
             <InscripcionTorneo
                 initialValues={formValues}
