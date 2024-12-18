@@ -29,7 +29,7 @@ router.get('/', async (req, res, next) => {
 router.route('/editar/:id')
     .get(async(req, res, next) => {
         try {
-            const data = await Torneo.findById(req.params.id);
+            const data = await Torneo.findById(req.params.id).populate('jugadores').populate('equipos');
             res.json(data);
         } catch (error) {
             return next(error);
@@ -67,6 +67,9 @@ router.put('/inscribir-jugador/:id', async(req, res, next) => {
         const jugadorInscribir = await Jugador.findOne(
             {nombreJugador: req.body.nombreParticipante}
         );
+        if (!jugadorInscribir){
+            throw new Error('Jugador inexistente');
+        }
         const data = await Torneo.findByIdAndUpdate(
             req.params.id,
             {$push: {jugadores: jugadorInscribir}},
@@ -85,6 +88,9 @@ router.put('/inscribir-equipo/:id', async(req, res, next) => {
         const equipoInscribir = await Equipo.findOne(
             {nombreEquipo: req.body.nombreParticipante}
         );
+        if (!equipoInscribir) {
+            throw new Error('Equipo inexistente');
+        }
         const data = await Torneo.findByIdAndUpdate(
             req.params.id,
             {$push: {equipos: equipoInscribir}},
