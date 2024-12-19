@@ -111,7 +111,11 @@ function InscribirTorneo(){
 
     return(
         <>
-            <h3 className="my-4">Participantes inscritos</h3>
+            <h3 className="mt-4">
+                Participantes inscritos:
+                <small className="text-body-secondary h4"> {participantesList.length}</small>
+            </h3>
+            <h6 className="text-body-secondary h6 mb-4">mínimo para apertura:  {formValues.minParticipantes}</h6>
             <ListGroup variant="flush">
                 {participantesList.length !== 0 ? participantesList : '¡sé el primero!'}
             </ListGroup>
