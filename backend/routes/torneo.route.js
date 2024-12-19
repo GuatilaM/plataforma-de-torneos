@@ -64,19 +64,27 @@ router.delete('/eliminar/:id', async(req, res, next) => {
 // Inscribir jugador
 router.put('/inscribir-jugador/:id', async(req, res, next) => {
     try {
+        // encontrar el jugador a inscribir
         const jugadorInscribir = await Jugador.findOne(
             {nombreJugador: req.body.nombreParticipante}
         );
         if (!jugadorInscribir){
             throw new Error('Jugador inexistente');
         }
-        const data = await Torneo.findByIdAndUpdate(
-            req.params.id,
-            {$push: {jugadores: jugadorInscribir}},
-            {new: true}
-        );
-        console.log(data);
-        res.json(data);  
+        // encontrar torneo
+        const torneo = await Torneo.findById(req.params.id).populate('jugadores');
+        // verificar que jugador no esté inscrito
+        for (let jugador of torneo.jugadores){
+            if (jugador._id.equals(jugadorInscribir._id)){
+                throw new Error('Jugador previamente inscrito');
+            }
+        }
+        // actualizar y guardar
+        torneo.jugadores.push(jugadorInscribir);
+        await torneo.save();
+
+        console.log(torneo);
+        res.json(torneo);  
     } catch (error) {
         return next(error);
     }
@@ -91,13 +99,19 @@ router.put('/inscribir-equipo/:id', async(req, res, next) => {
         if (!equipoInscribir) {
             throw new Error('Equipo inexistente');
         }
-        const data = await Torneo.findByIdAndUpdate(
-            req.params.id,
-            {$push: {equipos: equipoInscribir}},
-            {new: true}
-        );
-        console.log(data);
-        res.json(data);  
+        const torneo = await Torneo.findById(req.params.id).populate('equipos');
+        // verificar que equipo no esté inscrito
+        for (let equipo of torneo.equipos){
+            if (equipo._id.equals(equipoInscribir._id)){
+                throw new Error('Equipo previamente inscrito');
+            }
+        }
+        // actualizar y guardar
+        torneo.equipos.push(equipoInscribir);
+        await torneo.save();
+
+        console.log(torneo);
+        res.json(torneo);  
     } catch (error) {
         return next(error);
     }
