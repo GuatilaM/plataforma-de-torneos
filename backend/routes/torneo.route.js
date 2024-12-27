@@ -63,64 +63,54 @@ router.delete('/eliminar/:id', async(req, res, next) => {
     }
 });
 
-// Inscribir jugador
-router.put('/inscribir-jugador/:id', async(req, res, next) => {
-    try {
-        // encontrar el jugador a inscribir
-        const jugadorInscribir = await Jugador.findOne(
-            {nombreJugador: req.body.nombreParticipante}
-        );
-        if (!jugadorInscribir){
-            throw new Error('Jugador inexistente');
-        }
-        // encontrar torneo
-        const torneo = await Torneo.findById(req.params.id).populate('jugadores');
-        // validar que el torneo no haya comenzado
-        if (hoy >= torneo.fechaInicio){
-            throw new Error('Torneo ya ha comenzado');
-        }
-        // verificar que jugador no esté inscrito
-        for (let jugador of torneo.jugadores){
-            if (jugador._id.equals(jugadorInscribir._id)){
-                throw new Error('Jugador previamente inscrito');
+// Inscribir o eliminar participante
+router.route('/editar-participante/:id')
+    .put(async(req, res, next) => {
+        try {
+            const { numJugadoresEquipo, nombreParticipante } = req.body;
+            const esIndividual = numJugadoresEquipo === 1 ? true : false;
+            // encontrar el participante a inscribir, sea jugador o equipo
+            const participanteInscribir = esIndividual ?
+                await Jugador.findOne(
+                    {nombreJugador: nombreParticipante}
+                ) :
+                await Equipo.findOne(
+                    {nombreEquipo: nombreParticipante}
+                );
+            if (!participanteInscribir){
+                throw new Error('Participante inexistente');
             }
-        }
-        // actualizar y guardar
-        torneo.jugadores.push(jugadorInscribir);
-        await torneo.save();
-
-        console.log(torneo);
-        res.json(torneo);  
-    } catch (error) {
-        return next(error);
-    }
-});
-
-// Inscribir equipo
-router.put('/inscribir-equipo/:id', async(req, res, next) => {
-    try {
-        const equipoInscribir = await Equipo.findOne(
-            {nombreEquipo: req.body.nombreParticipante}
-        );
-        if (!equipoInscribir) {
-            throw new Error('Equipo inexistente');
-        }
-        const torneo = await Torneo.findById(req.params.id).populate('equipos');
-        // verificar que equipo no esté inscrito
-        for (let equipo of torneo.equipos){
-            if (equipo._id.equals(equipoInscribir._id)){
-                throw new Error('Equipo previamente inscrito');
+            // encontrar torneo
+            const torneo = await Torneo.findById(req.params.id).populate('jugadores').populate('equipos');
+            // validar que el torneo no haya comenzado
+            if (hoy >= torneo.fechaInicio){
+                throw new Error('Torneo ya ha comenzado');
             }
+            // verificar que el participante no esté inscrito y actualizar lista
+            if (esIndividual){
+                for (let jugador of torneo.jugadores){
+                    if (jugador._id.equals(participanteInscribir._id)){
+                        throw new Error('Jugador previamente inscrito');
+                    }
+                }
+                torneo.jugadores.push(participanteInscribir);
+            } else {
+                for (let equipo of torneo.equipos){
+                    if (equipo._id.equals(participanteInscribir._id)){
+                        throw new Error('Equipo previamente inscrito');
+                    }
+                }
+                torneo.equipos.push(participanteInscribir);
+            }
+            // guardar
+            await torneo.save();
+            // enviar respuesta
+            console.log(torneo);
+            res.json(torneo);
+        } catch (error) {
+            return next(error);
         }
-        // actualizar y guardar
-        torneo.equipos.push(equipoInscribir);
-        await torneo.save();
-
-        console.log(torneo);
-        res.json(torneo);  
-    } catch (error) {
-        return next(error);
-    }
-});
+    })
+    .delete(async(req, res, next) => {});
 
 module.exports = router;
