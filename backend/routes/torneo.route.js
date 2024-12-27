@@ -4,6 +4,8 @@ const Torneo = require('../models/Torneo');
 const Jugador = require('../models/Jugador');
 const Equipo = require('../models/Equipo');
 
+const hoy = new Date();
+
 // CREATE Torneo
 router.post('/crear', async (req, res, next) => {
     try {
@@ -73,6 +75,10 @@ router.put('/inscribir-jugador/:id', async(req, res, next) => {
         }
         // encontrar torneo
         const torneo = await Torneo.findById(req.params.id).populate('jugadores');
+        // validar que el torneo no haya comenzado
+        if (hoy >= torneo.fechaInicio){
+            throw new Error('Torneo ya ha comenzado');
+        }
         // verificar que jugador no esté inscrito
         for (let jugador of torneo.jugadores){
             if (jugador._id.equals(jugadorInscribir._id)){
