@@ -47,7 +47,7 @@ function ListaTorneos({torneoObj, hoy}) {
                 {numJugadoresEquipo === 1 ?
                 'Individual' : numJugadoresEquipo}
             </td>
-            <td>
+            <td className="d-flex justify-content-end">
                 {torneoIniciado ? <></> :
                     <Link to={`/torneos/inscripciones/${_id}`}>
                         <Button variant="success" className="mx-1">

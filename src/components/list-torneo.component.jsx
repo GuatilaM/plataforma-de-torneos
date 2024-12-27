@@ -6,7 +6,8 @@ import ListaTorneos from "./ListaTorneos";
 function ListTorneo() {
     const [torneos, setTorneos] = useState([]);
 
-    const hoy = new Date();
+    let hoy = new Date();
+    hoy = hoy.toISOString();
 
     useEffect(() => {
         axios.get('http://localhost:4000/torneos')
