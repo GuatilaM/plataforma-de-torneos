@@ -4,10 +4,12 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import ListGroup from "react-bootstrap/ListGroup";
+import Close from "../svg/close.svg";
 
 function InscribirTorneo(){
     const [formValues, setFormValues] = useState(
         {
+            _id: '',
             nombre: '',
             fechaInicio: '',
             fechaFin: '',
@@ -28,37 +30,24 @@ function InscribirTorneo(){
     let navigate = useNavigate();
 
     const onSubmit = (torneoObject) => {
-        if (label === 'Nombre jugador'){
-            axios.put(`http://localhost:4000/torneos/inscribir-jugador/${id}`, torneoObject)
-                .then((response) => {
-                    if (response.status === 200) {
-                        alert('Inscripción exitosa');
-                        // Redirigir al usuario al inicio
-                        navigate('/');
-                    } else {
-                        Promise.reject();
-                    }
-                })
-                .catch((error) => alert('Ha ocurrido un error'));
-        } else if (label === 'Nombre equipo'){
-            axios.put(`http://localhost:4000/torneos/inscribir-equipo/${id}`, torneoObject)
-                .then((response) => {
-                    if (response.status === 200) {
-                        alert('Inscripción exitosa');
-                        // Redirigir al usuario al inicio
-                        navigate('/');
-                    } else {
-                        Promise.reject();
-                    }
-                })
-                .catch((error) => alert('Ha ocurrido un error'));
-        }
+        axios.put(`http://localhost:4000/torneos/editar-participante/${id}`, torneoObject)
+            .then((response) => {
+                if (response.status === 200) {
+                    alert('Inscripción exitosa');
+                    // Redirigir al usuario al inicio
+                    navigate('/');
+                } else {
+                    Promise.reject();
+                }
+            })
+            .catch((error) => alert('Ha ocurrido un error'));
     }
 
     useEffect(() => {
         axios.get(`http://localhost:4000/torneos/editar/${id}`)
             .then((response) => {
                 let {
+                    _id,
                     nombre,
                     fechaInicio,
                     fechaFin,
@@ -76,6 +65,7 @@ function InscribirTorneo(){
 
                 setFormValues({
                     ...formValues,
+                    _id,
                     nombre,
                     fechaInicio,
                     fechaFin,
@@ -98,15 +88,29 @@ function InscribirTorneo(){
         if (numJugadoresEquipo === 1){
             setLabel('Nombre jugador');
             list = jugadores.map((jugador, index) => 
-                <ListGroup.Item key={index}>{jugador.nombreJugador}</ListGroup.Item>
+                <ListGroup.Item key={index} className="d-flex justify-content-between">
+                    {jugador.nombreJugador}
+                    <button type="button" className="btn">
+                        <img src={Close} alt="close" />
+                    </button>
+                </ListGroup.Item>
             );
         } else {
             setLabel('Nombre equipo');
             list = equipos.map((equipo, index) => 
-                <ListGroup.Item key={index}>{equipo.nombreEquipo}</ListGroup.Item>
+                <ListGroup.Item key={index} className="d-flex justify-content-between">
+                    {equipo.nombreEquipo}
+                    <button type="button" className="btn">
+                        <img src={Close} alt="close" />
+                    </button>
+                </ListGroup.Item>
             );
         }
         setParticipantesList(list);
+    }
+
+    function eliminarParticipante(_id){
+        axios.delete(`http://localhost:4000/torneos/editar-participante/${_id}`)
     }
 
     return(
