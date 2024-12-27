@@ -6,6 +6,8 @@ import ListaTorneos from "./ListaTorneos";
 function ListTorneo() {
     const [torneos, setTorneos] = useState([]);
 
+    const hoy = new Date();
+
     useEffect(() => {
         axios.get('http://localhost:4000/torneos')
             .then(({ data }) => {
@@ -19,7 +21,7 @@ function ListTorneo() {
     const tableData = () => {
         return torneos.map((torneo, index) => {
             return (
-                <ListaTorneos torneoObj={torneo} key={index} />
+                <ListaTorneos torneoObj={torneo} hoy={hoy} key={index} />
             );
         });
     }

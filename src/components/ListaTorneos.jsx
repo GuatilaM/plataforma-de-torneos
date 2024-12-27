@@ -6,7 +6,7 @@ import Edit from "../svg/edit.svg";
 import Delete from "../svg/delete.svg";
 import Register from "../svg/register.svg";
 
-function ListaTorneos({torneoObj}) {
+function ListaTorneos({torneoObj, hoy}) {
     let {
         _id,
         nombre,
@@ -16,6 +16,8 @@ function ListaTorneos({torneoObj}) {
         descripcion,
         numJugadoresEquipo,
     } = torneoObj;
+
+    const torneoIniciado = hoy >= fechaInicio ? true : false;
 
     // Cambiar formato de ISO al mismo del input (legible)
     fechaInicio = format(fechaInicio, 'dd/MM/yyyy');
@@ -46,11 +48,13 @@ function ListaTorneos({torneoObj}) {
                 'Individual' : numJugadoresEquipo}
             </td>
             <td>
-                <Link to={`/torneos/inscripciones/${_id}`}>
-                    <Button variant="success" className="mx-1">
-                        <img src={Register} alt="register" />
-                    </Button>
-                </Link>
+                {torneoIniciado ? <></> :
+                    <Link to={`/torneos/inscripciones/${_id}`}>
+                        <Button variant="success" className="mx-1">
+                            <img src={Register} alt="register" />
+                        </Button>
+                    </Link>
+                }
                 <Link to={`/torneos/editar/${_id}`}>
                     <Button variant="secondary" className="mx-1">
                         <img src={Edit} alt="edit" />
