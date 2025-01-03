@@ -4,12 +4,11 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import ListGroup from "react-bootstrap/ListGroup";
-import Close from "../svg/close.svg";
+import ListaParticipantes from "./ListaParticipantes";
 
 function InscribirTorneo(){
     const [formValues, setFormValues] = useState(
         {
-            _id: '',
             nombre: '',
             fechaInicio: '',
             fechaFin: '',
@@ -47,7 +46,6 @@ function InscribirTorneo(){
         axios.get(`http://localhost:4000/torneos/editar/${id}`)
             .then((response) => {
                 let {
-                    _id,
                     nombre,
                     fechaInicio,
                     fechaFin,
@@ -65,7 +63,6 @@ function InscribirTorneo(){
 
                 setFormValues({
                     ...formValues,
-                    _id,
                     nombre,
                     fechaInicio,
                     fechaFin,
@@ -85,32 +82,19 @@ function InscribirTorneo(){
 
     function setLabelAndParticipantesList(numJugadoresEquipo, jugadores, equipos) {
         let list = []; 
-        if (numJugadoresEquipo === 1){
+        const esIndividual = numJugadoresEquipo === 1 ? true : false;
+        if (esIndividual){
             setLabel('Nombre jugador');
             list = jugadores.map((jugador, index) => 
-                <ListGroup.Item key={index} className="d-flex justify-content-between">
-                    {jugador.nombreJugador}
-                    <button type="button" className="btn">
-                        <img src={Close} alt="close" />
-                    </button>
-                </ListGroup.Item>
+                <ListaParticipantes participanteObj={jugador} esIndividual={esIndividual} torneoId={id} key={index} />
             );
         } else {
             setLabel('Nombre equipo');
             list = equipos.map((equipo, index) => 
-                <ListGroup.Item key={index} className="d-flex justify-content-between">
-                    {equipo.nombreEquipo}
-                    <button type="button" className="btn">
-                        <img src={Close} alt="close" />
-                    </button>
-                </ListGroup.Item>
+                <ListaParticipantes participanteObj={equipo} esIndividual={esIndividual} torneoId={id} key={index} />
             );
         }
         setParticipantesList(list);
-    }
-
-    function eliminarParticipante(_id){
-        axios.delete(`http://localhost:4000/torneos/editar-participante/${_id}`)
     }
 
     return(
