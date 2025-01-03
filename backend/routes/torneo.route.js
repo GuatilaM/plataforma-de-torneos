@@ -64,8 +64,7 @@ router.delete('/eliminar/:id', async(req, res, next) => {
 });
 
 // Inscribir o eliminar participante
-router.route('/editar-participante/:id')
-    .put(async(req, res, next) => {
+router.put('/editar-participante/:id', async(req, res, next) => {
         try {
             const { numJugadoresEquipo, nombreParticipante } = req.body;
             const esIndividual = numJugadoresEquipo === 1 ? true : false;
@@ -110,7 +109,41 @@ router.route('/editar-participante/:id')
         } catch (error) {
             return next(error);
         }
-    })
-    .delete(async(req, res, next) => {});
+    });
+
+// Eliminar participante
+router.delete('/:idTorneo/eliminar-participante/:idParticipante', async(req, res, next) => {
+    try {
+        const torneo = await Torneo.findById(req.params.idTorneo).populate('jugadores').populate('equipos');
+        // validar que el torneo no haya comenzado
+        if (hoy >= torneo.fechaInicio){
+            throw new Error('Torneo ya ha comenzado');
+        }
+        // eliminar participante de la lista en torneo
+        if (req.body.esIndividual){
+            for (let jugador of torneo.jugadores){
+                if (jugador._id.equals(req.params.idParticipante)){
+                    const index = torneo.jugadores.indexOf(jugador);
+                    torneo.jugadores.splice(index, 1);
+                }
+            }
+        } else {
+            for (let equipo of torneo.equipos){
+                if (equipo._id.equals(req.params.idParticipante)){
+                    const index = torneo.equipos.indexOf(equipo);
+                    torneo.equipos.splice(index, 1);
+                }
+            }
+        }
+        // guardar
+        await torneo.save();
+        // enviar respuesta
+        res.status(200).json({
+            msg: torneo,
+        });
+    } catch (error) {
+        return next(error);
+    }
+});
 
 module.exports = router;
