@@ -27,7 +27,7 @@ function ListEquipos() {
     return (
         <div>
             <h3 className="h3 my-4">Todos los equipos</h3>
-            <Table>
+            <Table responsive className="align-middle">
                 <thead>
                     <tr>
                         <th>Nombre Equipo</th>

@@ -47,22 +47,24 @@ function ListaTorneos({torneoObj, hoy}) {
                 {numJugadoresEquipo === 1 ?
                 'Individual' : numJugadoresEquipo}
             </td>
-            <td className="d-flex justify-content-end">
-                {torneoIniciado ? <></> :
-                    <Link to={`/torneos/inscripciones/${_id}`}>
-                        <Button variant="success" className="mx-1">
-                            <img src={Register} alt="register" />
+            <td>
+                <div className="d-flex justify-content-end">
+                    {torneoIniciado ? <></> :
+                        <Link to={`/torneos/inscripciones/${_id}`}>
+                            <Button variant="success" className="mx-1">
+                                <img src={Register} alt="register" />
+                            </Button>
+                        </Link>
+                    }
+                    <Link to={`/torneos/editar/${_id}`}>
+                        <Button variant="secondary" className="mx-1">
+                            <img src={Edit} alt="edit" />
                         </Button>
                     </Link>
-                }
-                <Link to={`/torneos/editar/${_id}`}>
-                    <Button variant="secondary" className="mx-1">
-                        <img src={Edit} alt="edit" />
+                    <Button variant="danger" className="mx-1" onClick={eliminarTorneo}>
+                        <img src={Delete} alt="delete" />
                     </Button>
-                </Link>
-                <Button variant="danger" className="mx-1" onClick={eliminarTorneo}>
-                    <img src={Delete} alt="delete" />
-                </Button>
+                </div>
             </td>
         </tr>
     );

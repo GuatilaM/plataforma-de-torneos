@@ -27,7 +27,7 @@ function ListJugadores() {
     return (
         <div>
             <h3 className="h3 my-4">Todos los jugadores</h3>
-            <Table>
+            <Table responsive className="align-middle">
                 <thead>
                     <tr>
                         <th>Nombre Jugador</th>

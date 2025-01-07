@@ -30,7 +30,7 @@ function ListTorneo() {
     return (
         <div>
             <h3 className="h3 my-4">Todos los torneos</h3>
-            <Table className="my-3">
+            <Table className="my-3 align-middle" responsive>
                 <thead>
                     <tr>
                         <th>Nombre Torneo</th>

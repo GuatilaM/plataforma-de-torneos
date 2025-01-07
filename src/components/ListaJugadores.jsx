@@ -28,15 +28,17 @@ function ListaJugadores({jugadorObj}) {
         <tr>
             <th>{nombreJugador}</th>
             <td>{emailJugador}</td>
-            <td className="d-flex justify-content-end">
-                <Link to={`/jugadores/editar/${_id}`}>
-                    <Button variant="secondary" className="mx-1">
-                        <img src={Edit} alt="edit" />
+            <td>
+                <div className="d-flex justify-content-end">
+                    <Link to={`/jugadores/editar/${_id}`}>
+                        <Button variant="secondary" className="mx-1">
+                            <img src={Edit} alt="edit" />
+                        </Button>
+                    </Link>
+                    <Button variant="danger" className="mx-1" onClick={eliminarJugador}>
+                        <img src={Delete} alt="delete" />
                     </Button>
-                </Link>
-                <Button variant="danger" className="mx-1" onClick={eliminarJugador}>
-                    <img src={Delete} alt="delete" />
-                </Button>
+                </div>
             </td>
         </tr>
     );
