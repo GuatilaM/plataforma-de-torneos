@@ -28,9 +28,10 @@ app.listen(port, () => {
     console.log('Express app listening on port: ' + port);
 });
 
-app.use((err, req, res, next) => {
-    res.status(404).send('Error 404: not found');
-});
+// app.use((err, req, res, next) => {
+//     console.error(err.message);
+//     res.status(404).send('Error 404: not found');
+// });
 
 app.use((err, req, res, next) => {
     console.error(err.message);
