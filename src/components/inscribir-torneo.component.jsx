@@ -99,6 +99,7 @@ function InscribirTorneo(){
 
     return(
         <>
+            <h2 className="h2 mt-4">Torneo: {formValues.nombre}</h2>
             <h3 className="mt-4">
                 Participantes inscritos:
                 <small className="text-body-secondary h4"> {participantesList.length}</small>
