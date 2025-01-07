@@ -25,18 +25,21 @@ function ListJugadores() {
     }
 
     return (
-        <Table>
-            <thead>
-                <tr>
-                    <th>Nombre Jugador</th>
-                    <th>Email</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {tableData()}
-            </tbody>
-        </Table>
+        <div>
+            <h3 className="h3 my-4">Todos los jugadores</h3>
+            <Table>
+                <thead>
+                    <tr>
+                        <th>Nombre Jugador</th>
+                        <th>Email</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {tableData()}
+                </tbody>
+            </Table>
+        </div>
     );
 }
 

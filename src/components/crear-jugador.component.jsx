@@ -30,6 +30,7 @@ function CrearJugador() {
             initialValues={formValues}
             onSubmit={onSubmit}
             enableReinitialize
+            esCrear={true}
         />
     );
 }

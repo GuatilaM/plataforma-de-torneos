@@ -28,22 +28,25 @@ function ListTorneo() {
     }
 
     return (
-        <Table className="my-3">
-            <thead>
-                <tr>
-                    <th>Nombre Torneo</th>
-                    <th>Fecha de inicio</th>
-                    <th>Fecha fin</th>
-                    <th>Tipo de torneo</th>
-                    <th>Descripción</th>
-                    <th>Jugadores por equipo</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {tableData()}
-            </tbody>
-        </Table>
+        <div>
+            <h3 className="h3 my-4">Todos los torneos</h3>
+            <Table className="my-3">
+                <thead>
+                    <tr>
+                        <th>Nombre Torneo</th>
+                        <th>Fecha de inicio</th>
+                        <th>Fecha fin</th>
+                        <th>Tipo de torneo</th>
+                        <th>Descripción</th>
+                        <th>Jugadores por equipo</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {tableData()}
+                </tbody>
+            </Table>
+        </div>
     );
 }
 

@@ -51,6 +51,7 @@ function EditarJugador() {
             initialValues={formValues}
             onSubmit={onSubmit}
             enableReinitialize
+            esCrear={false}
         />
     );
 }

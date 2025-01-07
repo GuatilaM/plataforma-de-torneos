@@ -75,6 +75,7 @@ function EditarTorneo() {
             initialValues={formValues}
             onSubmit={onSubmit}
             enableReinitialize
+            esCrear={false}
         />
     );
 }

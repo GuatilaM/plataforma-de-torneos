@@ -30,6 +30,7 @@ function CrearEquipo() {
             initialValues={formValues}
             onSubmit={onSubmit}
             enableReinitialize
+            esCrear={true}
         />
     );
 }

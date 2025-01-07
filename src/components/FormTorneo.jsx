@@ -7,6 +7,7 @@ import TextInput from "./TextInput";
 
 function FormTorneo(props){
     const hoy = new Date();
+    const tipoDeAccion = props.esCrear ? "Crear" : "Editar"; 
 
     const schema = Yup.object({
         nombre: Yup.string().required('Campo requerido'),
@@ -35,68 +36,71 @@ function FormTorneo(props){
     });
 
     return (
-        <Formik
-            {...props}
-            validationSchema={schema}
-        >
-            <Form noValidate>
-                <BForm.Group className="my-3">
-                    <TextInput
-                        label="Nombre del torneo"
-                        name="nombre"
-                        type="text"
-                    />
-                </BForm.Group>
-                <BForm.Group className="mb-3">
-                    <TextInput
-                        label="Fecha inicio"
-                        name="fechaInicio"
-                        type="text"
-                        placeholder="dd/mm/aaaa"
-                    />
-                </BForm.Group>
-                <BForm.Group className="mb-3">
-                    <TextInput
-                        label="Fecha fin"
-                        name="fechaFin"
-                        type="text"
-                        placeholder="dd/mm/aaaa"
-                    />
-                </BForm.Group>
-                <BForm.Group className="mb-3">
-                    <BForm.Label htmlFor="tipo">Tipo de torneo</BForm.Label>
-                    <Field as="select" name="tipo" className="form-select">
-                        <option value="simple">Eliminación simple</option>
-                        <option value="doble">Eliminación doble</option>
-                        <option value="liga">Liga</option>
-                    </Field>
-                </BForm.Group>
-                <BForm.Group className="mb-3">
-                    <TextInput
-                        label="Descripción"
-                        name="descripcion"
-                        type="text"
-                        as="textarea"
-                    />
-                </BForm.Group>
-                <BForm.Group className="mb-3">
-                    <TextInput
-                        label="Número de jugadores por equipo"
-                        name="numJugadoresEquipo"
-                        type="text"
-                        placeholder="Individual: 1"
-                    />
-                </BForm.Group>
-                <BForm.Group className="mb-3">
-                    <TextInput
-                        label="Mínimo de participantes"
-                        name="minParticipantes"
-                        type="text"
-                    />
-                </BForm.Group>
-                <Button variant="success" type="submit">Crear Torneo</Button>
-            </Form>
-        </Formik>
+        <div>
+            <h3 className="h3 my-4">{tipoDeAccion} torneo</h3>
+            <Formik
+                {...props}
+                validationSchema={schema}
+            >
+                <Form noValidate>
+                    <BForm.Group className="my-3">
+                        <TextInput
+                            label="Nombre del torneo"
+                            name="nombre"
+                            type="text"
+                        />
+                    </BForm.Group>
+                    <BForm.Group className="mb-3">
+                        <TextInput
+                            label="Fecha inicio"
+                            name="fechaInicio"
+                            type="text"
+                            placeholder="dd/mm/aaaa"
+                        />
+                    </BForm.Group>
+                    <BForm.Group className="mb-3">
+                        <TextInput
+                            label="Fecha fin"
+                            name="fechaFin"
+                            type="text"
+                            placeholder="dd/mm/aaaa"
+                        />
+                    </BForm.Group>
+                    <BForm.Group className="mb-3">
+                        <BForm.Label htmlFor="tipo">Tipo de torneo</BForm.Label>
+                        <Field as="select" name="tipo" className="form-select">
+                            <option value="simple">Eliminación simple</option>
+                            <option value="doble">Eliminación doble</option>
+                            <option value="liga">Liga</option>
+                        </Field>
+                    </BForm.Group>
+                    <BForm.Group className="mb-3">
+                        <TextInput
+                            label="Descripción"
+                            name="descripcion"
+                            type="text"
+                            as="textarea"
+                        />
+                    </BForm.Group>
+                    <BForm.Group className="mb-3">
+                        <TextInput
+                            label="Número de jugadores por equipo"
+                            name="numJugadoresEquipo"
+                            type="text"
+                            placeholder="Individual: 1"
+                        />
+                    </BForm.Group>
+                    <BForm.Group className="mb-3">
+                        <TextInput
+                            label="Mínimo de participantes"
+                            name="minParticipantes"
+                            type="text"
+                        />
+                    </BForm.Group>
+                    <Button variant="success" type="submit">{tipoDeAccion} Torneo</Button>
+                </Form>
+            </Formik>
+        </div>
     );
 }
 

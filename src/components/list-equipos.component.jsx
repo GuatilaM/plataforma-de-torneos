@@ -25,18 +25,21 @@ function ListEquipos() {
     }
 
     return (
-        <Table>
-            <thead>
-                <tr>
-                    <th>Nombre Equipo</th>
-                    <th>Nombres Integrantes</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {tableData()}
-            </tbody>
-        </Table>
+        <div>
+            <h3 className="h3 my-4">Todos los equipos</h3>
+            <Table>
+                <thead>
+                    <tr>
+                        <th>Nombre Equipo</th>
+                        <th>Nombres Integrantes</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {tableData()}
+                </tbody>
+            </Table>
+        </div>
     );
 }
 

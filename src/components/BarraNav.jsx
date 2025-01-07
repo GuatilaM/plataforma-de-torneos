@@ -10,7 +10,7 @@ function BarraNav() {
             <Container>
                 <Navbar.Brand>
                     <Link to={'/'} className='nav-link'>
-                        Reto de Programacion UD
+                        Plataforma de torneos
                     </Link>
                 </Navbar.Brand>
                 <Navbar.Toggle />

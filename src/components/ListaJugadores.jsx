@@ -26,7 +26,7 @@ function ListaJugadores({jugadorObj}) {
 
     return (
         <tr>
-            <td>{nombreJugador}</td>
+            <th>{nombreJugador}</th>
             <td>{emailJugador}</td>
             <td className="d-flex justify-content-end">
                 <Link to={`/jugadores/editar/${_id}`}>

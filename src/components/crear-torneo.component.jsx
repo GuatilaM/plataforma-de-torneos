@@ -41,6 +41,7 @@ function CrearTorneo() {
             initialValues={formValues}
             onSubmit={onSubmit}
             enableReinitialize
+            esCrear={true}
         />
     );
 }

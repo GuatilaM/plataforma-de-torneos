@@ -26,7 +26,7 @@ function ListaEquipos({equipoObj}) {
 
     return (
         <tr>
-            <td>{nombreEquipo}</td>
+            <th>{nombreEquipo}</th>
             <td>{nombresIntegrantes}</td>
             <td className="d-flex justify-content-end">
                 <Link to={`/equipos/editar/${_id}`}>

@@ -38,7 +38,7 @@ function ListaTorneos({torneoObj, hoy}) {
 
     return (
         <tr>
-            <td>{nombre}</td>
+            <th>{nombre}</th>
             <td>{fechaInicio}</td>
             <td>{fechaFin}</td>
             <td>{tipo}</td>
