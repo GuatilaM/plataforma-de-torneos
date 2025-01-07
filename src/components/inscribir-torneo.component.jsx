@@ -39,7 +39,7 @@ function InscribirTorneo(){
                     Promise.reject();
                 }
             })
-            .catch((error) => alert('Ha ocurrido un error'));
+            .catch((error) => alert(error.response.data));
     }
 
     useEffect(() => {
