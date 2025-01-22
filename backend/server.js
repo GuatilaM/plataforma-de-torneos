@@ -6,7 +6,9 @@ const TorneoRoute = require('./routes/torneo.route');
 const JugadorRoute = require('./routes/jugador.route');
 const EquipoRoute = require('./routes/equipo.route');
 
-mongoose.connect('mongodb://127.0.0.1:27017/backend')
+const dbUri = process.env.DB_URI || "mongodb://127.0.0.1:27017/backend";
+
+mongoose.connect(dbUri)
     .then(() => {
         console.log('Database connected successfully');
     })
@@ -22,7 +24,7 @@ app.use('/torneos', TorneoRoute);
 app.use('/jugadores', JugadorRoute);
 app.use('/equipos', EquipoRoute);
 
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 app.listen(port, () => {
     console.log('Express app listening on port: ' + port);
