@@ -1,0 +1,23 @@
+services:
+  react-front:
+    build: .
+    ports:
+      - "3000:3000"
+
+  backend:
+    build: ./backend
+    ports:
+      - "4000:4000"
+    environment:  
+      DB_URI: mongodb://mongodb:27017/backend
+    depends_on:
+      - mongodb
+
+  mongodb: 
+    container_name: mongo-container
+    image: mongo:latest
+    volumes: 
+      - mongodb:/data/db
+
+volumes:
+  mongodb: {}
