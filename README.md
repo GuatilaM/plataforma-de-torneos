@@ -1,6 +1,24 @@
-# Getting Started with Create React App
+# Cómo probar la aplicación
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Para probar la aplicación, necesita una carpeta vacía en su dispositivo y tener instalado Docker. 
+
+Allí va a descargar el documento [docker-compose.yml](https://github.com/GuatilaM/plataforma-de-torneos/blob/main/docker-compose.yml) para utilizar el container Docker de esta aplicación.
+
+En una terminal, deberá correr el siguiente comando con derechos de super usuario:
+
+`docker compose up -d`
+
+De este modo, Docker descargará las imágenes de los servicios necesarios, construirá la aplicación y la correrá. 
+
+Al correr, tomará un tiempo inicializando, pero al cabo de unos 20 segundos, puede probar la aplicación abriendo [http://localhost:3000](http://localhost:3000) en un navegador.
+
+#### Terminar la aplicación
+
+Para dar término a la aplicación, deberá correr el siguiente comando:
+
+`docker compose down`
+
+<!-- This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
@@ -67,4 +85,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 ### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
