@@ -1,11 +1,13 @@
 services:
   react-front:
     build: .
+    image: guatilam/plataforma-de-torneos:front-v1.2
     ports:
       - "3000:3000"
 
   backend:
     build: ./backend
+    image: guatilam/plataforma-de-torneos:back-v1.2
     ports:
       - "4000:4000"
     environment:  
