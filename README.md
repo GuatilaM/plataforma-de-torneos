@@ -1,4 +1,4 @@
-# Cómo probar la aplicación
+# \[ES\] Cómo probar la aplicación
 
 Para probar la aplicación, necesita una carpeta vacía en su dispositivo y tener instalado Docker. 
 
@@ -15,6 +15,26 @@ Al correr, tomará un tiempo inicializando, pero al cabo de unos 20 segundos, pu
 #### Terminar la aplicación
 
 Para dar término a la aplicación, deberá correr el siguiente comando:
+
+`docker compose down`
+
+# \[EN\] How to test the app
+
+To test the app, you need an empty folder on your device as well as Docker installed.
+
+There, you'll download the document [docker-compose.yml](https://github.com/GuatilaM/plataforma-de-torneos/blob/main/docker-compose.yml) to be able to use this app's Docker container. 
+
+In a terminal, you'll need to run the following command with super user rights:
+
+`docker compose up -d`
+
+This way, Docker will download all the necessary services' images, build the app, and run it.
+
+On runtime, it'll take some time initializing. But after about 20 seconds, you can test the app opening [http://localhost:3000](http://localhost:3000) in a web browser.
+
+### Terminate the app
+
+To terminate the app, you'll need to run the following command:
 
 `docker compose down`
 
