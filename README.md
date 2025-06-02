@@ -1,3 +1,39 @@
+## Plataforma de torneos (Tournament platform)
+
+\[ES\] Una aplicación CRUD que provee la funcionalidad de ver, crear, editar y eliminar Torneos, Jugadores y Equipos. 
+
+Hecha con:
+ - React (React Router DOM, React Bootstrap, validación con Yup y Formik) 
+ - Node.js
+ - Express 
+ - MongoDB (Mongoose). 
+
+Containerizada con Docker.
+
+\[EN\] A CRUD application that provides the functionality of viewing, creating, editing, and deleting Tournaments, Players, and Teams.
+
+Built with: 
+ - React (React Router DOM, React Bootstrap, Yup and Formik validation)
+ - Node.js
+ - Express
+ - MongoDB (Mongoose). 
+
+Containerized with Docker.
+
+## Estado del proyecto (Project Status)
+
+\[ES\] Este proyecto está completo.
+
+\[EN\] This project is complete.
+
+## Capturas de pantalla del proyecto (Project Screenshots)
+
+![Listado de torneos](/assets/images/list-torneo.png "Listado de torneos")
+
+![Creación de torneo](/assets/images/crear-torneo.png "Formulario de creación de torneo")
+
+![Creación de equipo](/assets/images/crear-equipo.png "Formulario de creación de equipo")
+
 # \[ES\] Cómo probar la aplicación
 
 Para probar la aplicación, necesita una carpeta vacía en su dispositivo y tener instalado Docker. 
@@ -37,72 +73,3 @@ On runtime, it'll take some time initializing. But after about 20 seconds, you c
 To terminate the app, you'll need to run the following command:
 
 `docker compose down`
-
-<!-- This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
